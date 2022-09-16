@@ -1,4 +1,4 @@
-﻿{
+{
     "folders":  [
                     {
                         "path":  ".AL-Go"
@@ -8,6 +8,15 @@
                     }
                 ],
     "settings":  {
-
+		"al.enableCodeAnalysis": true,
+		"al.codeAnalyzers": ["${PerTenantExtensionCop}",
+        "${UICop}",
+        "${CodeCop}"],
+		"CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+		"CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+		"CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+		"CRS.OnSaveAlFileAction": "Reorganize",
+		"CRS.RemoveSuffixFromFilename": true,
+        "alOutline.defaultAppArea": "dev"
                  }
 }
