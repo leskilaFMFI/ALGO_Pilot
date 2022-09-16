@@ -1,7 +1,9 @@
-{
+﻿{
     "country":  "fi",
     "appFolders":  [
-        "AL in GitHub Pilot"],
+                       "AL in GitHub Pilot"
+                   ],
     "testFolders":  [
-    ]
+                        "AL in GitHub Pilot.Test"
+                    ]
 }
