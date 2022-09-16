@@ -17,6 +17,7 @@
 		"CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
 		"CRS.OnSaveAlFileAction": "Reorganize",
 		"CRS.RemoveSuffixFromFilename": true,
+        "CRS.RenameWithGit": true,
         "alOutline.defaultAppArea": "dev"
                  }
 }
