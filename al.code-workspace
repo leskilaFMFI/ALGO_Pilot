@@ -1,4 +1,4 @@
-﻿{
+{
     "folders":  [
                     {
                         "path":  ".AL-Go"
@@ -23,6 +23,7 @@
                      "CRS.OnSaveAlFileAction":  "Reorganize",
                      "CRS.RemoveSuffixFromFilename":  true,
                      "CRS.RenameWithGit":  true,
-                     "alOutline.defaultAppArea":  "dev"
+                    "alOutline.defaultAppArea": "dev",
+                    "powershell.cwd": "c:\\AL\\TestingProjects\\ALGO_Pilot\\.AL-Go"
                  }
 }
