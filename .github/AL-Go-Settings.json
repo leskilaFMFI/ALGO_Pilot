@@ -1,4 +1,10 @@
 ﻿{
     "type":  "PTE",
-    "templateUrl":  "https://github.com/microsoft/AL-Go-PTE@main"
+    "templateUrl":  "https://github.com/microsoft/AL-Go-PTE@main",
+    "DeployToSandbox2": {
+        "Projects":  "App2"
+    },
+    "DeployToSandbox": {
+        "Projects":  "AL in GitHub Pilot"
+}
 }

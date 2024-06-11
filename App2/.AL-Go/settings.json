@@ -1,0 +1,15 @@
+{
+  "name": "dummy",
+  "installTestRunner": true,
+  "installTestFramework": false,
+  "installTestLibraries": false,
+  "installPerformanceToolkit": true,
+  "enableCodeCop": true,
+  "enablePerTenantExtensionCop": true,
+  "enableUICop": true,
+  "appFolders": [
+  ],
+  "testFolders": [
+
+  ]
+}
