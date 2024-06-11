@@ -1,16 +1,17 @@
-﻿{
-    "name": "dummy",
-    "installTestRunner":  true,
-    "installTestFramework":  false,
-    "installTestLibraries":  false,
-    "installPerformanceToolkit":  true,
-    "enableCodeCop":  true,
-    "enablePerTenantExtensionCop":  true,
-    "enableUICop":  true,
-    "appFolders":  [
-                       "AL in GitHub Pilot"
-                   ],
-    "testFolders":  [
-                        "AL in GitHub Pilot.Test"
-                    ]
+{
+  "name": "dummy",
+  "installTestRunner": true,
+  "installTestFramework": false,
+  "installTestLibraries": false,
+  "installPerformanceToolkit": true,
+  "enableCodeCop": true,
+  "enablePerTenantExtensionCop": true,
+  "enableUICop": true,
+  "appFolders": [
+    "AL in GitHub Pilot",
+    "App2"
+  ],
+  "testFolders": [
+    "AL in GitHub Pilot.Test"
+  ]
 }

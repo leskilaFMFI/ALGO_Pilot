@@ -1,29 +1,32 @@
 {
-    "folders":  [
-                    {
-                        "path":  ".AL-Go"
-                    },
-                    {
-                        "path":  "AL in GitHub Pilot"
-                    },
-                    {
-                        "path":  "AL in GitHub Pilot.Test"
-                    }
-                ],
-    "settings":  {
-                     "al.enableCodeAnalysis":  true,
-                     "al.codeAnalyzers":  [
-                                              "${PerTenantExtensionCop}",
-                                              "${UICop}",
-                                              "${CodeCop}"
-                                          ],
-                     "CRS.FileNamePattern":  "\u003cObjectNameShort\u003e.\u003cObjectTypeShortPascalCase\u003e.al",
-                     "CRS.FileNamePatternExtensions":  "\u003cObjectNameShort\u003e.\u003cObjectTypeShortPascalCase\u003e.al",
-                     "CRS.FileNamePatternPageCustomizations":  "\u003cObjectNameShort\u003e.\u003cObjectTypeShortPascalCase\u003e.al",
-                     "CRS.OnSaveAlFileAction":  "Reorganize",
-                     "CRS.RemoveSuffixFromFilename":  true,
-                     "CRS.RenameWithGit":  true,
-                    "alOutline.defaultAppArea": "dev",
-                    "powershell.cwd": "c:\\AL\\TestingProjects\\ALGO_Pilot\\.AL-Go"
-                 }
+  "folders": [
+    {
+      "path": ".AL-Go"
+    },
+    {
+      "path": "AL in GitHub Pilot"
+    },
+    {
+      "path": "AL in GitHub Pilot.Test"
+    },
+    {
+      "path": "App2"
+    }
+  ],
+  "settings": {
+    "al.enableCodeAnalysis": true,
+    "al.codeAnalyzers": [
+      "${PerTenantExtensionCop}",
+      "${UICop}",
+      "${CodeCop}"
+    ],
+    "CRS.FileNamePattern": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.FileNamePatternExtensions": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.FileNamePatternPageCustomizations": "<ObjectNameShort>.<ObjectTypeShortPascalCase>.al",
+    "CRS.OnSaveAlFileAction": "Reorganize",
+    "CRS.RemoveSuffixFromFilename": true,
+    "CRS.RenameWithGit": true,
+    "alOutline.defaultAppArea": "dev",
+    "powershell.cwd": "c:\\AL\\TestingProjects\\ALGO_Pilot\\.AL-Go"
+  }
 }
