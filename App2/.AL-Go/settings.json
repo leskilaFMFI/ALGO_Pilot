@@ -8,6 +8,7 @@
   "enablePerTenantExtensionCop": true,
   "enableUICop": true,
   "appFolders": [
+    "app"
   ],
   "testFolders": [
 
