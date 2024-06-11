@@ -1,15 +1,21 @@
-﻿name: ' Test Current'
+﻿name: 'Pull Request Build'
 
 on:
-  workflow_dispatch:
+  pull_request_target:
+    branches: [ 'main' ]
 
-permissions:
-  contents: read
-  actions: read
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 defaults:
   run:
     shell: powershell
+
+permissions:
+  contents: read
+  actions: read
+  pull-requests: read
 
 env:
   workflowDepth: 1
@@ -17,8 +23,15 @@ env:
   ALGoRepoSettings: ${{ vars.ALGoRepoSettings }}
 
 jobs:
+  PregateCheck:
+    if: (github.event.pull_request.base.repo.full_name != github.event.pull_request.head.repo.full_name) && (github.event_name != 'pull_request')
+    runs-on: windows-latest
+    steps:
+      - uses: microsoft/AL-Go-Actions/VerifyPRChanges@v5.2
+
   Initialization:
-    needs: [ ]
+    needs: [ PregateCheck ]
+    if: (!failure() && !cancelled())
     runs-on: [ windows-latest ]
     outputs:
       telemetryScopeJson: ${{ steps.init.outputs.telemetryScopeJson }}
@@ -27,6 +40,7 @@ jobs:
       projects: ${{ steps.determineProjectsToBuild.outputs.ProjectsJson }}
       projectDependenciesJson: ${{ steps.determineProjectsToBuild.outputs.ProjectDependenciesJson }}
       buildOrderJson: ${{ steps.determineProjectsToBuild.outputs.BuildOrderJson }}
+      baselineWorkflowRunId: ${{ steps.determineProjectsToBuild.outputs.BaselineWorkflowRunId }}
       workflowDepth: ${{ steps.DetermineWorkflowDepth.outputs.WorkflowDepth }}
     steps:
       - name: Dump Workflow Information
@@ -38,13 +52,14 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
+          ref: refs/pull/${{ github.event.number }}/merge
 
       - name: Initialize the workflow
         id: init
         uses: microsoft/AL-Go-Actions/WorkflowInitialize@v5.2
         with:
           shell: powershell
-          eventId: "DO0101"
+          eventId: "DO0104"
 
       - name: Read settings
         id: ReadSettings
@@ -77,27 +92,27 @@ jobs:
     with:
       shell: ${{ needs.Initialization.outputs.githubRunnerShell }}
       runsOn: ${{ needs.Initialization.outputs.githubRunner }}
+      checkoutRef: refs/pull/${{ github.event.number }}/merge
       parentTelemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
       project: ${{ matrix.project }}
       projectName: ${{ matrix.projectName }}
       buildMode: ${{ matrix.buildMode }}
       projectDependenciesJson: ${{ needs.Initialization.outputs.projectDependenciesJson }}
-      secrets: 'licenseFileUrl,codeSignCertificateUrl,*codeSignCertificatePassword,keyVaultCertificateUrl,*keyVaultCertificatePassword,keyVaultClientId,gitHubPackagesContext,applicationInsightsConnectionString'
+      baselineWorkflowRunId: ${{ needs.Initialization.outputs.baselineWorkflowRunId }}
+      secrets: 'licenseFileUrl,keyVaultCertificateUrl,*keyVaultCertificatePassword,keyVaultClientId,gitHubPackagesContext,applicationInsightsConnectionString'
       publishThisBuildArtifacts: ${{ needs.Initialization.outputs.workflowDepth > 1 }}
-      artifactsNameSuffix: 'Current'
+      artifactsNameSuffix: 'PR${{ github.event.number }}'
 
-  PostProcess:
+  StatusCheck:
     needs: [ Initialization, Build ]
-    if: always()
+    if: (!cancelled())
     runs-on: [ windows-latest ]
+    name: Pull Request Status Check
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Finalize the workflow
-        id: PostProcess
-        uses: microsoft/AL-Go-Actions/WorkflowPostProcess@v5.2
+      - name: Pull Request Status Check
+        id: PullRequestStatusCheck
+        uses: microsoft/AL-Go-Actions/PullRequestStatusCheck@v5.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         with:
           shell: powershell
-          eventId: "DO0101"
-          telemetryScopeJson: ${{ needs.Initialization.outputs.telemetryScopeJson }}
